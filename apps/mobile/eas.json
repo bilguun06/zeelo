@@ -4,10 +4,10 @@
     "preview": {
       "distribution": "internal",
       "android": { "buildType": "apk" },
-      "env": { "EXPO_PUBLIC_API_URL": "https://zeelo-api.onrender.com" }
+      "env": { "EXPO_PUBLIC_API_URL": "https://zeelo-api-4qye.onrender.com" }
     },
     "production": {
-      "env": { "EXPO_PUBLIC_API_URL": "https://zeelo-api.onrender.com" }
+      "env": { "EXPO_PUBLIC_API_URL": "https://zeelo-api-4qye.onrender.com" }
     }
   }
 }

@@ -55,7 +55,7 @@ services:
       - key: CORS_ORIGINS
         value: https://zeelo-mobile.onrender.com,https://zeelo-admin.onrender.com
       - key: PUBLIC_API_URL
-        value: https://zeelo-api.onrender.com
+        value: https://zeelo-api-4qye.onrender.com
       - key: JWT_ACCESS_SECRET
         generateValue: true
       - key: JWT_ADMIN_SECRET
@@ -94,7 +94,7 @@ services:
       - key: NEXT_TELEMETRY_DISABLED
         value: "1"
       - key: API_URL
-        value: https://zeelo-api.onrender.com
+        value: https://zeelo-api-4qye.onrender.com
 
   # ── Mobile app (web build) — the same Expo app, served as a static site ──
   - type: web
@@ -110,4 +110,4 @@ services:
       - key: NODE_VERSION
         value: "22"
       - key: EXPO_PUBLIC_API_URL
-        value: https://zeelo-api.onrender.com
+        value: https://zeelo-api-4qye.onrender.com
