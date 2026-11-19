@@ -1,0 +1,60 @@
+# Local development & single-host staging.
+#   Infra only (recommended for dev):  npm run infra:up
+#   Full stack in containers:           docker compose -f infrastructure/docker/docker-compose.yml --profile app up -d --build
+name: orgil
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: orgil
+      POSTGRES_PASSWORD: orgil_dev_password
+      POSTGRES_DB: orgil
+      POSTGRES_INITDB_ARGS: "--encoding=UTF8 --locale=C"
+    ports: ["5432:5432"]
+    volumes: [pgdata:/var/lib/postgresql/data]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U orgil -d orgil"]
+      interval: 5s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    command: ["redis-server", "--appendonly", "yes"]
+    ports: ["6379:6379"]
+    volumes: [redisdata:/data]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      retries: 10
+
+  api:
+    profiles: [app]
+    build: { context: ../.., dockerfile: infrastructure/docker/api.Dockerfile }
+    restart: unless-stopped
+    env_file: ../../apps/api/.env
+    environment:
+      DATABASE_URL: postgresql://orgil:orgil_dev_password@postgres:5432/orgil?schema=public
+      REDIS_URL: redis://redis:6379
+      UPLOAD_DIR: /data/uploads
+    volumes: [uploads:/data/uploads]
+    ports: ["4000:4000"]
+    depends_on:
+      postgres: { condition: service_healthy }
+      redis: { condition: service_healthy }
+
+  admin:
+    profiles: [app]
+    build: { context: ../.., dockerfile: infrastructure/docker/admin.Dockerfile }
+    restart: unless-stopped
+    environment:
+      API_URL: http://api:4000
+    ports: ["3000:3000"]
+    depends_on: [api]
+
+volumes:
+  pgdata:
+  redisdata:
+  uploads:

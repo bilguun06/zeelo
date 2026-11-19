@@ -1,0 +1,16 @@
+node_modules/
+dist/
+.next/
+.expo/
+build/
+coverage/
+*.log
+.env
+.env.*
+!.env.example
+uploads/
+*.tsbuildinfo
+.DS_Store
+ios/
+android/
+next-env.d.ts

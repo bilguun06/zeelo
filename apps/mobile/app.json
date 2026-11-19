@@ -1,0 +1,42 @@
+{
+  "expo": {
+    "name": "Zeelo",
+    "slug": "orgil",
+    "scheme": "orgil",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "splash": {
+      "backgroundColor": "#FF5533",
+      "resizeMode": "contain"
+    },
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "mn.orgil.app",
+      "infoPlist": {
+        "NSFaceIDUsageDescription": "Зээло апп-д Face ID-ээр аюулгүй нэвтрэхэд ашиглана.",
+        "NSCameraUsageDescription": "Иргэний үнэмлэх болон нүүрний зураг авахад ашиглана.",
+        "NSPhotoLibraryUsageDescription": "Баримт бичгийн зураг сонгоход ашиглана."
+      }
+    },
+    "android": {
+      "package": "mn.orgil.app",
+      "adaptiveIcon": { "backgroundColor": "#FF5533" },
+      "permissions": ["USE_BIOMETRIC", "USE_FINGERPRINT", "CAMERA"],
+      "allowBackup": false
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "single"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-secure-store",
+      "expo-font",
+      ["expo-local-authentication", { "faceIDPermission": "Зээло апп-д Face ID-ээр аюулгүй нэвтрэхэд ашиглана." }],
+      ["expo-image-picker", { "cameraPermission": "Иргэний үнэмлэх болон нүүрний зураг авахад ашиглана." }]
+    ],
+    "experiments": { "typedRoutes": false }
+  }
+}

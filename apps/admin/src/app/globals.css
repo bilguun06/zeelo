@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Chart series colors — validated (lightness, chroma, CVD, contrast) per mode with the dataviz validator. */
+:root { --series-1: #F04A28; --series-2: #2F6FDB; --grid: #F1E4DE; --axis: #8C8481; }
+.dark { --series-1: #EC5A3A; --series-2: #4F8EF5; --grid: #2C2F3D; --axis: #8C8481; }
+
+@layer base {
+  html { -webkit-font-smoothing: antialiased; }
+  body { @apply bg-canvas text-ink dark:bg-canvas-dark dark:text-ink-inverse; }
+  ::selection { @apply bg-brand/20; }
+}
+
+@keyframes fade { from { opacity: 0 } to { opacity: 1 } }
+@keyframes pop { from { opacity: 0; transform: translateY(8px) scale(.98) } to { opacity: 1; transform: none } }
+@keyframes rise { from { opacity: 0; transform: translateY(6px) } to { opacity: 1; transform: none } }
+
+@keyframes drift { 0%,100% { transform: translate(0,0) } 50% { transform: translate(30px, 20px) } }
+@keyframes float { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-8px) } }
+
+.animate-rise { animation: rise .35s ease-out both; }
+/* Soft ambient backdrop: gentle coloured glows over a lightly tinted gradient + faint dot grid */
+body {
+  background-color: #FFF6F2;
+  background-image:
+    radial-gradient(rgba(20,22,31,0.035) 1.2px, transparent 1.4px),
+    radial-gradient(700px 520px at 92% -5%, rgba(255,85,51,0.16), transparent 65%),
+    radial-gradient(620px 520px at 20% 25%, rgba(255,138,76,0.08), transparent 65%),
+    radial-gradient(680px 560px at 100% 70%, rgba(255,181,71,0.12), transparent 65%),
+    radial-gradient(620px 520px at 0% 100%, rgba(255,122,182,0.08), transparent 65%),
+    radial-gradient(500px 400px at 55% 105%, rgba(255,181,71,0.07), transparent 65%),
+    linear-gradient(135deg, #FFF1EB 0%, #FFF8F5 50%, #FFF4E9 100%);
+  background-size: 28px 28px, auto, auto, auto, auto, auto, auto;
+  background-attachment: fixed;
+}
+.dark body {
+  background-color: #0D0E14;
+  background-image:
+    radial-gradient(rgba(255,255,255,0.03) 1.2px, transparent 1.4px),
+    radial-gradient(700px 520px at 92% -5%, rgba(255,85,51,0.22), transparent 65%),
+    radial-gradient(620px 520px at 20% 25%, rgba(255,138,76,0.10), transparent 65%),
+    radial-gradient(680px 560px at 100% 70%, rgba(255,181,71,0.08), transparent 65%),
+    radial-gradient(620px 520px at 0% 100%, rgba(255,122,182,0.07), transparent 65%),
+    linear-gradient(135deg, #15131A 0%, #0D0E14 50%, #17121A 100%);
+  background-size: 28px 28px, auto, auto, auto, auto, auto;
+}
+.tabular { font-variant-numeric: tabular-nums; }
